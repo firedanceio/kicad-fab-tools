@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kicad-fab-tools"
+version = "0.1.0"
+description = "Turn a KiCad board into a fab and assembly order: DRC summary, BOM checks against the board and LCSC stock, BOM pricing, JLCPCB BOM/CPL with rotation fixes, Gerber and drill zips."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.9"
+authors = [{ name = "Firedance" }]
+keywords = ["kicad", "pcb", "jlcpcb", "lcsc", "bom", "gerber", "pcba"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/firedanceio/kicad-fab-tools"
+
+[project.scripts]
+kicad-fab = "kicad_fab.cli:main"
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
