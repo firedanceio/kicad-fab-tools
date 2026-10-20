@@ -8,7 +8,8 @@ kicad-fab fab board.kicad_pcb --bom bom.csv --fixes rotation-fixes.csv -o fab-ou
 ```
 
 That runs DRC (stopping on errors), zips Gerbers for every copper layer plus drill files, checks
-the BOM against the board, and writes a JLCPCB BOM and CPL with your rotation fixes applied.
+the BOM against the board, and writes a JLCPCB BOM and CPL with your rotation fixes applied. It
+doesn't check stock or price: run `bom-check` and `bom-cost` for those.
 
 ## Install
 
@@ -28,7 +29,7 @@ kicad-fab finds `kicad-cli` on your PATH or in the macOS KiCad app; set `KICAD_C
 | `kicad-fab bom-check --board board.kicad_pcb --bom bom.csv --qty 10` | Every footprint has one BOM line, every placed BOM part is on the board, footprint names agree, and each LCSC part has stock for your build plus spares. |
 | `kicad-fab bom-cost --bom bom.csv --boards 10` | Price placed parts with live LCSC price tiers for your quantity and count extended parts. |
 | `kicad-fab jlc --board board.kicad_pcb --bom bom.csv --fixes rotation-fixes.csv` | Write JLCPCB's BOM and CPL files, applying rotation and offset fixes per footprint. |
-| `kicad-fab fab board.kicad_pcb --bom bom.csv` | All of the above, ready to upload. |
+| `kicad-fab fab board.kicad_pcb --bom bom.csv` | DRC, Gerber and drill zip, BOM vs board and JLC files in one go. Stops before making files on DRC errors (`--allow-drc-errors` to go on); BOM problems are listed and make it exit 1, but the JLC files are still written. No stock or price check: run `bom-check` and `bom-cost` for those. |
 
 Run any command with `--help` for its options. `--pos placements.csv` can replace `--board` if you
 already exported placements with `kicad-cli pcb export pos`.
